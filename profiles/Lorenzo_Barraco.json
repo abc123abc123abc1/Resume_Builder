@@ -1,0 +1,38 @@
+{
+  "name": "Lorenzo Barraco",
+  "title": "Senior AI/ML Engineer & AI Architect",
+  "email": "lorenzo.barraco1105@gmail.com",
+  "phone": "+44 7457 409294",
+  "location": "Padua, Italy",
+  "linkedin": "https://www.linkedin.com/in/lorenzo-barraco-05a29938b/",
+  "education": [
+    {
+      "university_name": "Sapienza University of Rome",
+      "period": "2012 - 2016",
+      "location": "Rome, Italy",
+      "degree": "Bachelor's Degree"
+    }
+  ],
+  "employment_history": [
+    {
+      "company_name": "Beam AI",
+      "period": "April 2024 - Present",
+      "location": "New York, US"
+    },
+    {
+      "company_name": "ComputD",
+      "period": "February 2022 - April 2024",
+      "location": "Amsterdam, Netherlands"
+    },
+    {
+      "company_name": "Allmatics",
+      "period": "February 2018 - January 2022",
+      "location": "Cambridge, UK"
+    },
+    {
+      "company_name": "Byteal Ltd",
+      "period": "April 2016 - January 2018",
+      "location": "Bristol, UK"
+    }
+  ]
+}

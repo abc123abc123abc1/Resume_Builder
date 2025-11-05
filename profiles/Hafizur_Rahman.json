@@ -1,0 +1,34 @@
+{
+    "name": "Hafizur Rahman",
+    "title": "Senior software Engineer",
+    "email": "rahman.hafizur.work@gmail.com",
+    "phone": "+44 7822 016826",
+    "location": "Padua, Italy",
+    "linkedin": "https://www.linkedin.com/in/hafizur-rahman-a8b918385/",
+    "education": [
+      {
+        "university_name": "University of Padua",
+        "period": "2013 - 2017",
+        "location": "Padua, Italy",
+        "degree": "Bachelor's Degree"
+      }
+    ],
+    "employment_history": [
+      {
+        "company_name": "Flatline Agency",
+        "period": "May 2022 - Present",
+        "location": "Amsterdam, Netherlands"
+      },
+      {
+        "company_name": "Will Squire",
+        "period": "September 2019 - May 2022",
+        "location": "London, UK"
+      },
+      {
+        "company_name": "Coders51",
+        "period": "July 2017 – September 2019",
+        "location": "Bologna, Italy"
+      }
+    ]
+  }
+  
