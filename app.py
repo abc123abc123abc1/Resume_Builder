@@ -115,7 +115,8 @@ def load_services():
         st.info("Using mock PDF generator for demo purposes.")
     
     # Check for OpenAI API key
-    openai_api_key = os.environ.get("OPENAI_API_KEY", "")
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+    # openai_api_key = os.environ.get("OPENAI_API_KEY", "")
     if not openai_api_key:
         st.warning("OpenAI API key not found. Using legacy resume generation method.")
         st.info("Set the OPENAI_API_KEY environment variable for enhanced resume generation.")
