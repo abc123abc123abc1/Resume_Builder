@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import base64
 from dotenv import load_dotenv
+from plyer import notification
 
 from models.schema import ResumeData, ProfileData, Education, EmploymentHistory
 from services.pdf_generator import PDFGenerator
@@ -242,6 +243,18 @@ with resume_tab:
                                 get_download_link(files["pdf"], f"{user_info['name'].replace(' ', '_')}_resume.pdf", "Download PDF"),
                                 unsafe_allow_html=True
                             )
+                        
+                        # Send system notification
+                        try:
+                            notification.notify(
+                                title="✅ Resume Generated Successfully!",
+                                message=f"Your tailored resume for {user_info['name']} is ready to download.",
+                                app_name="AI Resume Builder",
+                                timeout=10
+                            )
+                        except Exception as notif_error:
+                            # Don't break the flow if notification fails
+                            print(f"Notification error: {str(notif_error)}")
                     except Exception as e:
                         st.error(f"Error generating resume files: {str(e)}")
                 else:
@@ -255,6 +268,18 @@ with resume_tab:
                         file_name=f"{user_info['name'].replace(' ', '_')}_resume_data.json",
                         mime="application/json"
                     )
+                    
+                    # Send system notification
+                    try:
+                        notification.notify(
+                            title="✅ Resume Generated Successfully!",
+                            message=f"Your tailored resume data for {user_info['name']} is ready to download (JSON format).",
+                            app_name="AI Resume Builder",
+                            timeout=10
+                        )
+                    except Exception as notif_error:
+                        # Don't break the flow if notification fails
+                        print(f"Notification error: {str(notif_error)}")
 
 # Profile Management Tab (now second)
 with profile_tab:

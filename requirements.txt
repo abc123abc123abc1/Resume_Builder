@@ -4,3 +4,4 @@ markdown
 pdfservices-sdk
 python-dotenv
 openai
+plyer
