@@ -4,7 +4,7 @@ from pathlib import Path
 import json
 import base64
 from dotenv import load_dotenv
-from plyer import notification
+import streamlit.components.v1 as components
 
 from models.schema import ResumeData, ProfileData, Education, EmploymentHistory
 from services.pdf_generator import PDFGenerator
@@ -135,6 +135,50 @@ def get_download_link(content, filename, text):
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}">{text}</a>'
     return href
 
+# Helper function to send browser notifications
+def send_system_notification(title, message):
+    """Send a browser notification that appears as a system notification on the user's machine."""
+    notification_html = f"""
+    <script>
+    (function() {{
+        // Check if the browser supports notifications
+        if (!("Notification" in window)) {{
+            console.log("This browser does not support desktop notifications");
+            return;
+        }}
+        
+        // Function to show the notification
+        function showNotification() {{
+            var notification = new Notification("{title}", {{
+                body: "{message}",
+                icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📄</text></svg>",
+                requireInteraction: false,
+                silent: false
+            }});
+            
+            // Auto close after 10 seconds
+            setTimeout(function() {{
+                notification.close();
+            }}, 10000);
+        }}
+        
+        // Check the current permission status
+        if (Notification.permission === "granted") {{
+            // If already granted, show notification immediately
+            showNotification();
+        }} else if (Notification.permission !== "denied") {{
+            // Request permission if not denied
+            Notification.requestPermission().then(function(permission) {{
+                if (permission === "granted") {{
+                    showNotification();
+                }}
+            }});
+        }}
+    }})();
+    </script>
+    """
+    components.html(notification_html, height=0)
+
 # App UI
 st.title("🚀 AI Resume Builder")
 st.markdown("""
@@ -244,17 +288,11 @@ with resume_tab:
                                 unsafe_allow_html=True
                             )
                         
-                        # Send system notification
-                        try:
-                            notification.notify(
-                                title="✅ Resume Generated Successfully!",
-                                message=f"Your tailored resume for {user_info['name']} is ready to download.",
-                                app_name="AI Resume Builder",
-                                timeout=10
-                            )
-                        except Exception as notif_error:
-                            # Don't break the flow if notification fails
-                            print(f"Notification error: {str(notif_error)}")
+                        # Send system notification to user's browser/machine
+                        send_system_notification(
+                            "✅ Resume Generated Successfully!",
+                            f"Your tailored resume for {user_info['name']} is ready to download."
+                        )
                     except Exception as e:
                         st.error(f"Error generating resume files: {str(e)}")
                 else:
@@ -269,17 +307,11 @@ with resume_tab:
                         mime="application/json"
                     )
                     
-                    # Send system notification
-                    try:
-                        notification.notify(
-                            title="✅ Resume Generated Successfully!",
-                            message=f"Your tailored resume data for {user_info['name']} is ready to download (JSON format).",
-                            app_name="AI Resume Builder",
-                            timeout=10
-                        )
-                    except Exception as notif_error:
-                        # Don't break the flow if notification fails
-                        print(f"Notification error: {str(notif_error)}")
+                    # Send system notification to user's browser/machine
+                    send_system_notification(
+                        "✅ Resume Generated Successfully!",
+                        f"Your tailored resume data for {user_info['name']} is ready to download (JSON format)."
+                    )
 
 # Profile Management Tab (now second)
 with profile_tab:
