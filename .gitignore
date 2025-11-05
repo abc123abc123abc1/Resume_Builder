@@ -1,0 +1,62 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.env
+.venv
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Application specific
+profiles/
+output/
+pdfservices-api-credentials.json
+*.pdf
+*.docx
+*.tmp
+*.log
+
+# Adobe PDF Services SDK output
+output/CreatePDFFromDOCXWithOptions/
+output/MergeDocumentToDOCXWithFragments/
+output/DocumentMerge/
+
+# Streamlit specific
+.streamlit/
+
+# Local development files
+config.toml
+secrets.toml
+
+venv/
+__pycache__/

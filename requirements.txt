@@ -1,0 +1,6 @@
+streamlit
+pydantic
+markdown
+pdfservices-sdk
+python-dotenv
+openai
