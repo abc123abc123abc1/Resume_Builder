@@ -49,7 +49,7 @@ class ResumeData(BaseModel):
     email: str = Field(..., description="Email address of the candidate")
     phone: str = Field(..., description="Phone number of the candidate")
     location: str = Field(..., description="Location of the candidate")
-    linkedin: str = Field(None, description="LinkedIn profile URL")
+    linkedin: Optional[str] = Field(None, description="LinkedIn profile URL")
     summary: str = Field(..., description="Professional summary tailored to the job description")
     experiences: List[Experience] = Field(..., description="List of work experiences")
     education: List[Education] = Field(default_factory=list, description="Educational background")
