@@ -9,9 +9,6 @@ from openai import OpenAI
 class BulletPoint(BaseModel):
     bullet_point: str =  Field(..., description="bullet point of the expereience")
 
-class Technology(BaseModel):
-    technology: str = Field(..., description="Technology used in company")
-
 class CompanyInfo(BaseModel):
     """Schema for company information in experiences."""
     name: str = Field(..., description="Name of the company")
@@ -21,8 +18,7 @@ class CompanyInfo(BaseModel):
 class Experience(BaseModel):
     company_info: CompanyInfo = Field(..., description="Detailed company information")
     job_title: str = Field(..., description="Job title for the position")
-    bullet_points: List[BulletPoint] = Field(..., description="List of bullet points describing achievements. Do not return technology list as bullet points in here as they will be returned in technologies section.")
-    technologies: str = Field(..., description="List of technologies used in this position")
+    bullet_points: List[BulletPoint] = Field(..., description="List of bullet points describing achievements")
 
 class Education(BaseModel):
     """Schema for education data."""
@@ -106,9 +102,6 @@ class ResumeMatcher:
             # Generate a relevant job title (could be based on the original or adapted for the target job)
             job_title = self._generate_job_title(job, keywords, job_description)
             
-            # Generate relevant technologies
-            technologies = self._generate_technologies(job, keywords, job_description)
-            
             # Create an Experience object
             experiences.append(
                 Experience(
@@ -118,8 +111,7 @@ class ResumeMatcher:
                         location=job.location
                     ),
                     job_title=job_title,
-                    bullet_points=bullet_points,
-                    technologies=technologies
+                    bullet_points=bullet_points
                 )
             )
             
@@ -141,14 +133,6 @@ class ResumeMatcher:
         """Generate a job title based on the job description keywords."""
         # Placeholder - would be more sophisticated in real implementation
         return f"Senior {keywords[0].title()} Specialist"
-    
-    def _generate_technologies(self, job, keywords, job_description):
-        """Generate a comma-separated list of technologies based on keywords."""
-        # Placeholder - would be more sophisticated in real implementation
-        tech_keywords = [k.title() for k in keywords[5:10] if len(k) > 3]
-        base_techs = ["Python", "JavaScript", "AWS", "Docker", "Kubernetes"]
-        all_techs = base_techs + tech_keywords
-        return ", ".join(all_techs[:8])  # Limit to 8 technologies
 
     def extract_sills(self, job_description: str) -> Skills:
         """Generate a list of Hard & Soft skills from job description."""
@@ -769,8 +753,7 @@ Before outputting, perform a final self-critique. The resume is only complete if
                     "company": exp.company_info.name,
                     "job_title": exp.job_title,
                     "period": exp.company_info.period,
-                    "bullet_points": bullet_points,
-                    "technologies": exp.technologies
+                    "bullet_points": bullet_points
                 })
             
             # Create a prompt for the AI
@@ -887,8 +870,7 @@ Before outputting, perform a final self-critique. The resume is only complete if
                     BulletPoint(bullet_point="Implemented multi-stage code validation within the LangGraph framework, incorporating unit tests and integration tests, reducing manual code review overhead by 70%."),
                     BulletPoint(bullet_point="Enhanced contextual awareness by creating GraphRAG systems using Neo4j integrated with Azure AI Search, resulting in an 18% improvement in code generation accuracy."),
                     BulletPoint(bullet_point="Defined and codified reusable domain-specific process definition libraries (PDLs) for rapid instantiation of pre-configured, industry-tailored agent workflows.")
-                ],
-                technologies=", ".join(["LangChain", "LangGraph", "LangFuse", "Azure AI Services", "Azure OpenAI Services", "Microsoft GraphRAG", "Databricks", "PySpark"])
+                ]
             ),
             Experience(
                 company_info=CompanyInfo(
@@ -903,8 +885,7 @@ Before outputting, perform a final self-critique. The resume is only complete if
                     BulletPoint(bullet_point="Developed belief-desire-intention (BDI) agent architectures within the CrewAI framework, optimizing for rapid response times and accurate information retrieval."),
                     BulletPoint(bullet_point="Orchestrated deployment of agentic AI solutions on Microsoft Azure using Kubernetes and AKS, ensuring scalability and fault tolerance."),
                     BulletPoint(bullet_point="Provided technical leadership to a team of 9 AI engineers, fostering expertise in agent-based modeling and multi-agent system design.")
-                ],
-                technologies=", ".join(["CrewAI", "LangChain", "LangGraph", "LlamaIndex", "gRPC", "RabbitMQ", "Python", "Azure", "Kubernetes", "Azure Kubernetes Service"])
+                ]
             ),
             Experience(
                 company_info=CompanyInfo(
@@ -919,8 +900,7 @@ Before outputting, perform a final self-critique. The resume is only complete if
                     BulletPoint(bullet_point="Implemented core automation logic using Python, leveraging requests library for API interaction and SQLAlchemy for database operations."),
                     BulletPoint(bullet_point="Designed and implemented message queue-based task management systems using RabbitMQ and pika, enabling asynchronous processing of configuration tasks."),
                     BulletPoint(bullet_point="Created comprehensive testing suites using pytest, achieving 92% code coverage and reducing production incidents by 35%.")
-                ],
-                technologies=", ".join(["Python", "Flask", "REST APIs", "requests", "RabbitMQ", "pika", "pytest", "PostgreSQL", "SQLAlchemy"])
+                ]
             )
         ]
         

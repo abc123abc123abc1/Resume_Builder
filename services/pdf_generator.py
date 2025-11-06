@@ -70,8 +70,7 @@ class PDFGenerator:
                             'period': exp.company_info.period,
                             'location': exp.company_info.location,
                             'job_title': exp.job_title,
-                            'bullet_points': bullet_points,
-                            'technologies': exp.technologies
+                            'bullet_points': bullet_points
                         })
                 
                 # Read the template file
