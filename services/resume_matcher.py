@@ -34,8 +34,8 @@ class EmploymentHistory(BaseModel):
     location: str = Field(..., description="Location of the company")
 
 class Skill(BaseModel):
-    category: str = Field(..., description="Category of the skill. This is the category of small skill section in resume. It can be something like Programming Languages, or Communication etc")
-    skill_list: str = Field(..., description="This is the actual list of skills belongs to the category.")
+    category: str = Field(..., description="Category of the skill. This is the category of technical skills section in resume. It can be something like Programming Languages, Frameworks & Libraries, Tools & Platforms, or Methodologies. DO NOT include soft skills categories like Communication, Leadership, etc.")
+    skill_list: str = Field(..., description="This is the actual list of technical skills belongs to the category.")
 
 class ResumeData(BaseModel):
     """Schema for resume data that will be merged with the template."""
@@ -602,22 +602,24 @@ Before a single word is written, you must perform a deep strategic analysis.
     *   **Location:** City, ST
 
 **F. TECHNICAL SKILLS & COMPETENCIES**
-*   **Objective:** Create a clean, categorized, and comprehensive list of skills for quick scanning by both ATS and human reviewers.
+*   **Objective:** Create a clean, categorized, and comprehensive list of TECHNICAL skills ONLY for quick scanning by both ATS and human reviewers.
+*   **🚨 CRITICAL INSTRUCTION: DO NOT include soft skills (Communication, Leadership, Teamwork, etc.) in this section. ONLY technical/hard skills.**
 *   **Instructions:**
-    *   Organize skills into the following distinct categories.
+    *   Organize skills into the following distinct categories ONLY.
     *   Ensure this section mirrors the keywords from the job description and the technologies mentioned in your Professional Experience section.
-    *   Place only important key skills here.
+    *   Place only important technical skills here.
     *   **Programming Languages:** (e.g., Python, R, C++, Java)
     *   **Frameworks & Libraries:** (e.g., TensorFlow, PyTorch, Scikit-learn, Keras, Pandas, NumPy, Hugging Face)
     *   **Tools & Platforms:** (e.g., AWS, GCP, Azure, Docker, Kubernetes, Jira, Git, Tableau, Databricks)
-    *   **Methodologies & Soft Skills:** (e.g., Agile/Scrum, CI/CD, MLOps, Cross-Functional Collaboration, Strategic Planning, Stakeholder Communication)
+    *   **Methodologies:** (e.g., Agile/Scrum, CI/CD, MLOps, DevOps, Microservices)
+    *   **DO NOT CREATE:** Categories like "Communication", "Leadership", "Soft Skills", "Interpersonal Skills", etc.
 ---
 
 ### **GUIDING PRINCIPLES & FINAL REVIEW CHECKLIST**
 
 Before outputting, perform a final self-critique. The resume is only complete if it meets every one of these standards.
 
-1.  **ATS-First, Human-Optimized (DUAL-PURPOSE):** The resume MUST contain the exact keywords, hard skills ("{'", "'.join(skills.hard_skills)}"), soft skills ("{'", "'.join(skills.soft_skills)}"), and phrases from the job description to pass the ATS. The language and flow must be clean, professional, and compelling for a human.
+1.  **ATS-First, Human-Optimized (DUAL-PURPOSE):** The resume MUST contain the exact keywords, hard skills ("{'", "'.join(skills.hard_skills)}"), soft skills ("{'", "'.join(skills.soft_skills)}"), and phrases from the job description to pass the ATS. Hard skills go in the Technical Skills section. Soft skills MUST be woven naturally into bullet points and summary, NEVER listed as a category in the Skills section. The language and flow must be clean, professional, and compelling for a human.
 2.  **MEASURABLE RESULTS ARE MANDATORY:** Every bullet point in the experience section MUST be quantified. Scrutinize each one. If it lacks a metric (%, $, time, scale), it is a failure and must be revised. Use realistic KPIs.
 3.  **LEVERAGE THE USER'S REALITY:** The resume must be an enhanced, strategic representation of the `user_profile`. **DO NOT INVENT experiences.** Your skill is in framing the user's truth to align perfectly with the job's needs.
 4.  **AI/ML IS THE CORE:** The user's primary expertise is AI/ML. This must be the central thread of the resume's narrative, reflected in the summary, job titles, achievements, and skills.
@@ -650,8 +652,9 @@ Before outputting, perform a final self-critique. The resume is only complete if
     - **100% Coverage Required:** EVERY single provided skill MUST appear somewhere in the resume
     - **Smart Distribution:** Use the distribution strategy above to avoid messy repetition
     - **Quality over Quantity per Section:** Better to have skills naturally integrated across sections than forced into one area
-    - **Skills Section:** Should list ALL hard skills but organized by category (Programming, Frameworks, Tools, etc.)
-    - **Final Check:** Before completing, verify that each skill from both lists appears at least once in the resume
+    - **Skills Section:** Should list ALL hard skills ONLY, organized by category (Programming, Frameworks, Tools, Methodologies). DO NOT list soft skills in this section.
+    - **Soft Skills Integration:** Soft skills (Communication, Leadership, etc.) should ONLY appear naturally woven into bullet points and summary, NEVER as a separate category in the Skills section
+    - **Final Check:** Before completing, verify that each hard skill appears in the Skills section, and each soft skill appears in bullet points or summary
 
 ### **🚨 FINAL CRITICAL REMINDER: VERB UNIQUENESS IS MANDATORY 🚨**
 **BEFORE YOU OUTPUT THE RESUME:**
